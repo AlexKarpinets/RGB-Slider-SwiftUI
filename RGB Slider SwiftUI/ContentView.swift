@@ -51,7 +51,6 @@ struct ContentView: View {
     
     //    private func checkTextfield() {
     // }
-    //
     //    private func getAlert() -> Alert {
     //            return Alert(title: Text("Wrong Format!"),
     //                         message: Text("Please enter number"))
