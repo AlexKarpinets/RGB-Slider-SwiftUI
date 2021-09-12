@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var redSliderValue: Double
-    @State var greenSliderValue: Double
-    @State var blueSliderValue: Double
+    @State var redSliderValue = Double.random(in: 0...255)
+    @State var greenSliderValue = Double.random(in: 0...255)
+    @State var blueSliderValue = Double.random(in: 0...255)
     
     @State var redTextFieldText = ""
     @State var greenTextFieldText = ""
@@ -26,53 +26,60 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             VStack {
-                Color(red: redSliderValue, green: greenSliderValue, blue: blueSliderValue)
-                    .frame(width: 310, height: 150)
-                    .cornerRadius(30)
+                Color(
+                    red: redSliderValue /  255,
+                    green: greenSliderValue / 255,
+                    blue: blueSliderValue / 255)
+                    .frame(width: 350, height: 170)
+                    .cornerRadius(85)
+                    .overlay(Capsule().stroke(Color.white, lineWidth: 3))
                 
                 VStack {
-                    RedSlider(value: $redSliderValue, text: $redTextFieldText, alert: $alertPresented)
-                    GreenSlider(value: $greenSliderValue, text: $greenTextFieldText, alert: $alertPresented)
-                    BlueSlider(value: $blueSliderValue, text: $blueTextFieldText, alert: $alertPresented)
+                    RedSlider(value: $redSliderValue,
+                              alert: $alertPresented)
+                    GreenSlider(value: $greenSliderValue,
+                                alert: $alertPresented)
+                    BlueSlider(value: $blueSliderValue,
+                               alert: $alertPresented)
                 }
-                .padding()
+                .padding(.top)
                 Spacer()
             }
             .padding()
         }
     }
     
-//    private func checkTextfield() {
-//        if let _ = Double(redTextFieldText) {
-//            redTextFieldText = ""
-//            alertPresented.toggle()
-//            return
-//        }
-//        redTextFieldText = ""
-//}
+    //    private func checkTextfield() {
+    // }
+    //
+    //    private func getAlert() -> Alert {
+    //            return Alert(title: Text("Wrong Format!"),
+    //                         message: Text("Please enter number"))
+    //        }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(redSliderValue: 0, greenSliderValue: 0, blueSliderValue: 0)
+        ContentView()
     }
 }
 
 struct RedSlider: View {
     @Binding var value: Double
-    @Binding var text: String
     @Binding var alert: Bool
     
     var body: some View {
         HStack {
             Text("0").foregroundColor(.red)
-            Slider(value: $value)
+            Slider(value: $value, in: 0...255, step: 1)
                 .accentColor(.red)
             TextField("0", value: $value, formatter: NumberFormatter())
                 .border()
                 .foregroundColor(.red)
                 .alert(isPresented: $alert) {
-                    Alert(title: Text("Wrong Format!"), message: Text("Please enter number"))
+                    Alert(title: Text("Wrong Format!"),
+                          message: Text("Please enter number"))
                 }
         }
     }
@@ -80,19 +87,19 @@ struct RedSlider: View {
 
 struct GreenSlider: View {
     @Binding var value: Double
-    @Binding var text: String
     @Binding var alert: Bool
     
     var body: some View {
         HStack {
             Text("0").foregroundColor(.green)
-            Slider(value: $value)
+            Slider(value: $value, in: 0...255, step: 1)
                 .accentColor(.green)
             TextField("0", value: $value, formatter: NumberFormatter())
                 .border()
                 .foregroundColor(.green)
                 .alert(isPresented: $alert) {
-                    Alert(title: Text("Wrong Format!"), message: Text("Please enter number"))
+                    Alert(title: Text("Wrong Format!"),
+                          message: Text("Please enter number"))
                 }
         }
     }
@@ -100,18 +107,18 @@ struct GreenSlider: View {
 
 struct BlueSlider: View {
     @Binding var value: Double
-    @Binding var text: String
     @Binding var alert: Bool
     
     var body: some View {
         HStack {
             Text("0").foregroundColor(.blue)
-            Slider(value: $value)
+            Slider(value: $value, in: 0...255, step: 1)
             TextField("0", value: $value, formatter: NumberFormatter())
                 .border()
                 .foregroundColor(.blue)
                 .alert(isPresented: $alert) {
-                    Alert(title: Text("Wrong Format!"), message: Text("Please enter number"))
+                    Alert(title: Text("Wrong Format!"),
+                          message: Text("Please enter number"))
                 }
         }
     }

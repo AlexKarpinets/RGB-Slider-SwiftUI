@@ -11,7 +11,7 @@ import SwiftUI
 struct RGB_Slider_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(redSliderValue: 0, greenSliderValue: 0, blueSliderValue: 0)
+            ContentView()
         }
     }
 }
